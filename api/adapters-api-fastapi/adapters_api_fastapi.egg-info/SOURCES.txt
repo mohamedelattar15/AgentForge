@@ -1,0 +1,13 @@
+pyproject.toml
+adapters_api_fastapi.egg-info/PKG-INFO
+adapters_api_fastapi.egg-info/SOURCES.txt
+adapters_api_fastapi.egg-info/dependency_links.txt
+adapters_api_fastapi.egg-info/requires.txt
+adapters_api_fastapi.egg-info/top_level.txt
+agentforge_api/__init__.py
+agentforge_api/openai_schema_adapter.py
+agentforge_api/routes/__init__.py
+agentforge_api/routes/chat_completions.py
+agentforge_api/routes/health.py
+tests/test_openai_schema.py
+tests/test_schema.py

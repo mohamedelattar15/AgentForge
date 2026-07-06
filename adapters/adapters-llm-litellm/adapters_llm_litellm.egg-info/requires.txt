@@ -1,0 +1,2 @@
+agentforge-core>=0.1.0
+litellm>=1.40.0

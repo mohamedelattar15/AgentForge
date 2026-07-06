@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: adapters-memory-postgres-pgvector
+Version: 0.3.0
+Summary: AgentForge — Adapters mémoire PostgreSQL/pgvector (Semantic + Episodic)
+License: MIT
+Requires-Python: >=3.11
+Requires-Dist: agentforge-core>=0.1.0
+Requires-Dist: psycopg[binary]>=3.2.0

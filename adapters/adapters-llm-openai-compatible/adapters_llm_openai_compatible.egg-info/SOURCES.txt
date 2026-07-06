@@ -1,0 +1,8 @@
+pyproject.toml
+adapters_llm_openai_compatible.egg-info/PKG-INFO
+adapters_llm_openai_compatible.egg-info/SOURCES.txt
+adapters_llm_openai_compatible.egg-info/dependency_links.txt
+adapters_llm_openai_compatible.egg-info/requires.txt
+adapters_llm_openai_compatible.egg-info/top_level.txt
+agentforge_openai/__init__.py
+tests/test_openai_compatible.py

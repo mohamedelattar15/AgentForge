@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agentforge"
-version = "0.1.0"
+version = "0.3.0"
 description = "Framework modulaire pour construire des agents IA modernes — Harness, Loop, Memory, LLM Ops, Eval"
 readme = "README.md"
 license = {text = "MIT"}

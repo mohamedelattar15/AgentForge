@@ -1,0 +1,54 @@
+# Recipe : Startup Agent
+# Configuration pour un agent prêt pour la production légère.
+# Utilise LiteLLM pour le LLM et SQLite pour la persistance.
+
+agent:
+  name: startup-agent
+  version: "0.2.0"
+
+ports:
+  llm:
+    adapter: litellm
+    config:
+      model: gpt-4o-mini
+      temperature: 0.7
+      max_tokens: 4096
+  orchestration:
+    adapter: minimal
+    config: {}
+  working_memory:
+    adapter: inmemory
+    config: {}
+  semantic_memory:
+    adapter: sqlite
+    config:
+      db_path: "./data/semantic.db"
+  episodic_memory:
+    adapter: sqlite
+    config:
+      db_path: "./data/episodic.db"
+  procedural_memory:
+    adapter: default
+    config:
+      skills_path: "./skills"
+  tool_registry:
+    adapter: default
+    config: {}
+  event_bus:
+    adapter: inprocess
+    config: {}
+  trace:
+    adapter: default
+    config:
+      output_path: "./traces"
+  eval:
+    adapter: default
+    config: {}
+  analytics:
+    adapter: default
+    enabled: false
+
+guardrails:
+  max_iterations: 20
+  token_budget: 100000
+  timeout_seconds: 120
