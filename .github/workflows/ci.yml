@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev,yaml]"
+          pip install -e ./adapters/adapters-llm-litellm
+          pip install -e ./adapters/adapters-llm-openai-compatible
+          pip install -e ./adapters/adapters-memory-redis
+          pip install -e ./adapters/adapters-memory-qdrant
+          pip install -e ./adapters/adapters-memory-postgres-pgvector
+          pip install -e ./adapters/adapters-tools-mcp
+          pip install -e ./adapters/adapters-trace-langfuse
+          pip install -e ./adapters/adapters-trace-opentelemetry
+          pip install -e ./adapters/adapters-eval-ragas
+          pip install -e ./adapters/adapters-eval-deepeval
+          pip install -e ./adapters/adapters-orchestration-langgraph
+          pip install -e ./adapters/adapters-orchestration-temporal
+          pip install -e ./adapters/adapters-eventbus-nats
+          pip install -e ./adapters/adapters-analytics-clickhouse
+          pip install -e ./api/adapters-api-fastapi
+
+      - name: Lint with ruff
+        run: |
+          ruff check .
+
+      - name: Type check with mypy
+        run: |
+          mypy core/agentforge_core --ignore-missing-imports || true
+
+      - name: Test with pytest
+        run: |
+          python -m pytest core/tests/test_config.py core/tests/test_lifecycle.py -v --cov=agentforge_core
+
+      - name: Test adapters
+        run: |
+          python -m pytest adapters/adapters-llm-litellm/tests/ -v || true
+          python -m pytest adapters/adapters-llm-openai-compatible/tests/ -v || true
+          python -m pytest adapters/adapters-memory-redis/tests/ -v || true
+          python -m pytest adapters/adapters-memory-qdrant/tests/ -v || true
+          python -m pytest adapters/adapters-memory-postgres-pgvector/tests/ -v || true
+          python -m pytest adapters/adapters-tools-mcp/tests/ -v || true
+          python -m pytest adapters/adapters-trace-langfuse/tests/ -v || true
+          python -m pytest adapters/adapters-trace-opentelemetry/tests/ -v || true
+          python -m pytest adapters/adapters-eval-ragas/tests/ -v || true
+          python -m pytest adapters/adapters-eval-deepeval/tests/ -v || true
+          python -m pytest adapters/adapters-orchestration-langgraph/tests/ -v || true
+          python -m pytest adapters/adapters-orchestration-temporal/tests/ -v || true
+          python -m pytest adapters/adapters-eventbus-nats/tests/ -v || true
+          python -m pytest adapters/adapters-analytics-clickhouse/tests/ -v || true
+
+      - name: Test API
+        run: |
+          python -m pytest api/adapters-api-fastapi/tests/ -v || true

@@ -1,0 +1,8 @@
+pyproject.toml
+adapters_analytics_clickhouse.egg-info/PKG-INFO
+adapters_analytics_clickhouse.egg-info/SOURCES.txt
+adapters_analytics_clickhouse.egg-info/dependency_links.txt
+adapters_analytics_clickhouse.egg-info/requires.txt
+adapters_analytics_clickhouse.egg-info/top_level.txt
+agentforge_clickhouse/__init__.py
+tests/test_clickhouse.py

@@ -3,7 +3,8 @@
 
 from abc import ABC, abstractmethod
 
-from ..types import Message, RunContext
+from ..lifecycle.run_context import RunContext
+from ..types import Message
 
 
 class OrchestrationPort(ABC):

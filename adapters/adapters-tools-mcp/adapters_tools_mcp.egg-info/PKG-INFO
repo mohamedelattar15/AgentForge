@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: adapters-tools-mcp
+Version: 0.4.0
+Summary: AgentForge — Adapter Tools MCP (Model Context Protocol)
+License: MIT
+Requires-Python: >=3.11
+Requires-Dist: agentforge-core>=0.1.0
+Requires-Dist: mcp>=1.0.0

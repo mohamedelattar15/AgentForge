@@ -1,0 +1,76 @@
+# Recipe : Enterprise Agent
+# Configuration pour un agent prêt pour la production à grande échelle.
+# Stack complète : LangGraph/Temporal, Redis, Qdrant, PostgreSQL, NATS, Langfuse, ClickHouse
+
+agent:
+  name: enterprise-agent
+  version: "0.5.0"
+
+ports:
+  llm:
+    adapter: litellm
+    config:
+      model: gpt-4o
+      temperature: 0.3
+      max_tokens: 8192
+  orchestration:
+    adapter: temporal
+    config:
+      host: temporal:7233
+      namespace: agentforge
+      task_queue: agent-tasks
+  working_memory:
+    adapter: redis
+    config:
+      host: redis:6379
+      ttl_seconds: 3600
+  semantic_memory:
+    adapter: qdrant
+    config:
+      host: qdrant:6333
+      collection: semantic_memory
+      embedding_size: 1536
+  episodic_memory:
+    adapter: postgres
+    config:
+      dsn: postgresql://user:pass@postgres:5432/agentforge
+      pool_min: 5
+      pool_max: 20
+  procedural_memory:
+    adapter: default
+    config:
+      skills_path: "./skills"
+  tool_registry:
+    adapter: mcp
+    config:
+      servers:
+        - command: npx
+          args: ["-y", "@modelcontextprotocol/server-filesystem", "./data"]
+  event_bus:
+    adapter: nats
+    config:
+      servers: ["nats:4222"]
+      stream: agentforge
+  trace:
+    adapter: langfuse
+    config:
+      public_key: "${LANGFUSE_PUBLIC_KEY}"
+      secret_key: "${LANGFUSE_SECRET_KEY}"
+      host: https://cloud.langfuse.com
+  eval:
+    adapter: ragas
+    config:
+      metrics: ["faithfulness", "answer_relevancy"]
+      threshold: 0.7
+  analytics:
+    adapter: clickhouse
+    enabled: true
+    config:
+      host: clickhouse:9000
+      database: agentforge
+      table: run_metrics
+
+guardrails:
+  max_iterations: 50
+  token_budget: 500000
+  timeout_seconds: 600

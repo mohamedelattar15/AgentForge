@@ -1,0 +1,8 @@
+pyproject.toml
+adapters_trace_opentelemetry.egg-info/PKG-INFO
+adapters_trace_opentelemetry.egg-info/SOURCES.txt
+adapters_trace_opentelemetry.egg-info/dependency_links.txt
+adapters_trace_opentelemetry.egg-info/requires.txt
+adapters_trace_opentelemetry.egg-info/top_level.txt
+agentforge_otel/__init__.py
+tests/test_otel.py

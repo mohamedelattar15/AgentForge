@@ -1,0 +1,20 @@
+# AgentForge — Déploiement minimal (v0.1)
+# Lance uniquement l'API + le core — aucune infrastructure externe.
+
+version: "3.8"
+
+services:
+  agentforge:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./recipes:/app/recipes
+      - ./data:/app/data
+      - ./skills:/app/skills
+    environment:
+      - AGENTFORGE_CONFIG=recipes/recipe-minimal.yaml
+    command: >
+      sh -c "python -m agentforge_api.main recipes/recipe-minimal.yaml"

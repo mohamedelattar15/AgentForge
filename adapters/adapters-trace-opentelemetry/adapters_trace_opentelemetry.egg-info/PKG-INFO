@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: adapters-trace-opentelemetry
+Version: 0.4.0
+Summary: AgentForge — Adapter Trace OpenTelemetry (OTLP)
+License: MIT
+Requires-Python: >=3.11
+Requires-Dist: agentforge-core>=0.1.0
+Requires-Dist: opentelemetry-api>=1.25.0
+Requires-Dist: opentelemetry-sdk>=1.25.0
+Requires-Dist: opentelemetry-exporter-otlp-proto-grpc>=1.25.0

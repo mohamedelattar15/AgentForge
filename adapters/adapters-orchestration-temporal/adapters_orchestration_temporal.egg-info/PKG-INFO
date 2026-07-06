@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: adapters-orchestration-temporal
+Version: 0.5.0
+Summary: AgentForge — Adapter Orchestration Temporal
+License: MIT
+Requires-Python: >=3.11
+Requires-Dist: agentforge-core>=0.1.0
+Requires-Dist: temporalio>=1.7.0

@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agentforge
+  labels:
+    app: agentforge
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: agentforge
+  template:
+    metadata:
+      labels:
+        app: agentforge
+    spec:
+      containers:
+        - name: agentforge
+          image: agentforge/agentforge:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: AGENTFORGE_CONFIG
+              value: /app/config/recipe.yaml
+            - name: LANGFUSE_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: agentforge-secrets
+                  key: langfuse-public-key
+            - name: LANGFUSE_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: agentforge-secrets
+                  key: langfuse-secret-key
+          volumeMounts:
+            - name: config
+              mountPath: /app/config
+            - name: data
+              mountPath: /app/data
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      volumes:
+        - name: config
+          configMap:
+            name: agentforge-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: agentforge-data

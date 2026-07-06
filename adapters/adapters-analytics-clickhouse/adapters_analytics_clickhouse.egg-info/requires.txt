@@ -1,0 +1,2 @@
+agentforge-core>=0.1.0
+clickhouse-driver>=0.2.6

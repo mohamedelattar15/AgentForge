@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adapters-analytics-clickhouse"
+version = "0.5.0"
+description = "AgentForge — Adapter Analytics ClickHouse"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+dependencies = [
+    "agentforge-core>=0.1.0",
+    "clickhouse-driver>=0.2.6",
+]
+
+[tool.setuptools.packages.find]
+include = ["agentforge_clickhouse*"]

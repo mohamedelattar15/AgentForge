@@ -1,0 +1,8 @@
+pyproject.toml
+adapters_tools_mcp.egg-info/PKG-INFO
+adapters_tools_mcp.egg-info/SOURCES.txt
+adapters_tools_mcp.egg-info/dependency_links.txt
+adapters_tools_mcp.egg-info/requires.txt
+adapters_tools_mcp.egg-info/top_level.txt
+agentforge_mcp/__init__.py
+tests/test_mcp.py

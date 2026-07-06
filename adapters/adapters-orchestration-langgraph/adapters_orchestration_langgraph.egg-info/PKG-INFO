@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: adapters-orchestration-langgraph
+Version: 0.5.0
+Summary: AgentForge — Adapter Orchestration LangGraph
+License: MIT
+Requires-Python: >=3.11
+Requires-Dist: agentforge-core>=0.1.0
+Requires-Dist: langgraph>=0.2.0
+Requires-Dist: langchain-core>=0.3.0

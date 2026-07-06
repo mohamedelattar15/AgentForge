@@ -1,0 +1,2 @@
+agentforge-core>=0.1.0
+nats-py>=2.9.0
