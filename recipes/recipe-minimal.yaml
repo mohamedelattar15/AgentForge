@@ -1,0 +1,51 @@
+# Recipe : Minimal Agent
+# Configuration minimale — zéro dépendance externe.
+# Utilise les adapters par défaut embarqués dans le core.
+
+agent:
+  name: minimal-agent
+  version: "0.1.0"
+
+ports:
+  llm:
+    adapter: minimal
+    config: {}
+  orchestration:
+    adapter: minimal
+    config: {}
+  working_memory:
+    adapter: inmemory
+    config: {}
+  semantic_memory:
+    adapter: sqlite
+    config:
+      db_path: ":memory:"
+  episodic_memory:
+    adapter: sqlite
+    config:
+      db_path: ":memory:"
+  procedural_memory:
+    adapter: default
+    config:
+      skills_path: "./skills"
+  tool_registry:
+    adapter: default
+    config: {}
+  event_bus:
+    adapter: inprocess
+    config: {}
+  trace:
+    adapter: default
+    config:
+      output_path: "./traces"
+  eval:
+    adapter: default
+    config: {}
+  analytics:
+    adapter: default
+    enabled: false
+
+guardrails:
+  max_iterations: 10
+  token_budget: 50000
+  timeout_seconds: 60
